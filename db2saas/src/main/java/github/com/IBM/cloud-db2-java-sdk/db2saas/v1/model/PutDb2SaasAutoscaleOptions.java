@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -40,7 +40,7 @@ public class PutDb2SaasAutoscaleOptions extends GenericModel {
     String NO = "NO";
   }
 
-  protected String xDeploymentId;
+  protected String xDbProfile;
   protected String autoScalingEnabled;
   protected Long autoScalingThreshold;
   protected Double autoScalingOverTimePeriod;
@@ -51,7 +51,7 @@ public class PutDb2SaasAutoscaleOptions extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String xDeploymentId;
+    private String xDbProfile;
     private String autoScalingEnabled;
     private Long autoScalingThreshold;
     private Double autoScalingOverTimePeriod;
@@ -64,7 +64,7 @@ public class PutDb2SaasAutoscaleOptions extends GenericModel {
      * @param putDb2SaasAutoscaleOptions the instance to initialize the Builder with
      */
     private Builder(PutDb2SaasAutoscaleOptions putDb2SaasAutoscaleOptions) {
-      this.xDeploymentId = putDb2SaasAutoscaleOptions.xDeploymentId;
+      this.xDbProfile = putDb2SaasAutoscaleOptions.xDbProfile;
       this.autoScalingEnabled = putDb2SaasAutoscaleOptions.autoScalingEnabled;
       this.autoScalingThreshold = putDb2SaasAutoscaleOptions.autoScalingThreshold;
       this.autoScalingOverTimePeriod = putDb2SaasAutoscaleOptions.autoScalingOverTimePeriod;
@@ -81,10 +81,10 @@ public class PutDb2SaasAutoscaleOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param xDeploymentId the xDeploymentId
+     * @param xDbProfile the xDbProfile
      */
-    public Builder(String xDeploymentId) {
-      this.xDeploymentId = xDeploymentId;
+    public Builder(String xDbProfile) {
+      this.xDbProfile = xDbProfile;
     }
 
     /**
@@ -97,13 +97,13 @@ public class PutDb2SaasAutoscaleOptions extends GenericModel {
     }
 
     /**
-     * Set the xDeploymentId.
+     * Set the xDbProfile.
      *
-     * @param xDeploymentId the xDeploymentId
+     * @param xDbProfile the xDbProfile
      * @return the PutDb2SaasAutoscaleOptions builder
      */
-    public Builder xDeploymentId(String xDeploymentId) {
-      this.xDeploymentId = xDeploymentId;
+    public Builder xDbProfile(String xDbProfile) {
+      this.xDbProfile = xDbProfile;
       return this;
     }
 
@@ -166,9 +166,9 @@ public class PutDb2SaasAutoscaleOptions extends GenericModel {
   protected PutDb2SaasAutoscaleOptions() { }
 
   protected PutDb2SaasAutoscaleOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.xDeploymentId,
-      "xDeploymentId cannot be null");
-    xDeploymentId = builder.xDeploymentId;
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.xDbProfile,
+      "xDbProfile cannot be null");
+    xDbProfile = builder.xDbProfile;
     autoScalingEnabled = builder.autoScalingEnabled;
     autoScalingThreshold = builder.autoScalingThreshold;
     autoScalingOverTimePeriod = builder.autoScalingOverTimePeriod;
@@ -186,14 +186,14 @@ public class PutDb2SaasAutoscaleOptions extends GenericModel {
   }
 
   /**
-   * Gets the xDeploymentId.
+   * Gets the xDbProfile.
    *
    * CRN deployment id.
    *
-   * @return the xDeploymentId
+   * @return the xDbProfile
    */
-  public String xDeploymentId() {
-    return xDeploymentId;
+  public String xDbProfile() {
+    return xDbProfile;
   }
 
   /**

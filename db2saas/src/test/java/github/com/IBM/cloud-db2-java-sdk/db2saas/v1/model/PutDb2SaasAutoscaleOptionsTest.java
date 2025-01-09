@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,14 +32,14 @@ public class PutDb2SaasAutoscaleOptionsTest {
   @Test
   public void testPutDb2SaasAutoscaleOptions() throws Throwable {
     PutDb2SaasAutoscaleOptions putDb2SaasAutoscaleOptionsModel = new PutDb2SaasAutoscaleOptions.Builder()
-      .xDeploymentId("testString")
+      .xDbProfile("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
       .autoScalingEnabled("true")
       .autoScalingThreshold(Long.valueOf("90"))
       .autoScalingOverTimePeriod(Double.valueOf("5"))
       .autoScalingPauseLimit(Long.valueOf("70"))
       .autoScalingAllowPlanLimit("YES")
       .build();
-    assertEquals(putDb2SaasAutoscaleOptionsModel.xDeploymentId(), "testString");
+    assertEquals(putDb2SaasAutoscaleOptionsModel.xDbProfile(), "crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::");
     assertEquals(putDb2SaasAutoscaleOptionsModel.autoScalingEnabled(), "true");
     assertEquals(putDb2SaasAutoscaleOptionsModel.autoScalingThreshold(), Long.valueOf("90"));
     assertEquals(putDb2SaasAutoscaleOptionsModel.autoScalingOverTimePeriod(), Double.valueOf("5"));

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -40,7 +40,7 @@ public class PostDb2SaasUserOptionsTest {
     assertEquals(createUserAuthenticationModel.policyId(), "Default");
 
     PostDb2SaasUserOptions postDb2SaasUserOptionsModel = new PostDb2SaasUserOptions.Builder()
-      .xDeploymentId("testString")
+      .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
       .id("test-user")
       .iam(false)
       .ibmid("test-ibm-id")
@@ -51,7 +51,7 @@ public class PostDb2SaasUserOptionsTest {
       .locked("no")
       .authentication(createUserAuthenticationModel)
       .build();
-    assertEquals(postDb2SaasUserOptionsModel.xDeploymentId(), "testString");
+    assertEquals(postDb2SaasUserOptionsModel.xDeploymentId(), "crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::");
     assertEquals(postDb2SaasUserOptionsModel.id(), "test-user");
     assertEquals(postDb2SaasUserOptionsModel.iam(), Boolean.valueOf(false));
     assertEquals(postDb2SaasUserOptionsModel.ibmid(), "test-ibm-id");

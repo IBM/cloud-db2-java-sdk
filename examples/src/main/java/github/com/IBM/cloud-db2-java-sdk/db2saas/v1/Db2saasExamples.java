@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -18,25 +18,23 @@ import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 import com.ibm.cloud.sdk.core.util.CredentialUtils;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.CreateUserAuthentication;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.DeleteDb2SaasUserOptions;
+import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetDb2SaasAllowlistOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetDb2SaasAutoscaleOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetDb2SaasConnectionInfoOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetDb2SaasUserOptions;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetDb2SaasWhitelistOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetbyidDb2SaasUserOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.IpAddress;
+import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.PostDb2SaasAllowlistOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.PostDb2SaasUserOptions;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.PostDb2SaasWhitelistOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.PutDb2SaasAutoscaleOptions;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.PutDb2SaasUserOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessAutoScaling;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessConnectionInfo;
+import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessGetAllowlistIPs;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessGetUserByID;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessGetUserInfo;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessGetWhitelistIPs;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessPostWhitelistIPs;
+import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessPostAllowedlistIPs;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessUpdateAutoScale;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessUserResponse;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.UpdateUserAuthentication;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,8 +76,8 @@ public class Db2saasExamples {
       System.out.println("getDb2SaasConnectionInfo() result:");
       // begin-get_db2_saas_connection_info
       GetDb2SaasConnectionInfoOptions getDb2SaasConnectionInfoOptions = new GetDb2SaasConnectionInfoOptions.Builder()
-        .deploymentId("testString")
-        .xDeploymentId("testString")
+        .deploymentId("crn%3Av1%3Astaging%3Apublic%3Adashdb-for-transactions%3Aus-south%3Aa%2Fe7e3e87b512f474381c0684a5ecbba03%3A69db420f-33d5-4953-8bd8-1950abd356f6%3A%3A")
+        .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
         .build();
 
       Response<SuccessConnectionInfo> response = db2saasService.getDb2SaasConnectionInfo(getDb2SaasConnectionInfoOptions).execute();
@@ -93,39 +91,39 @@ public class Db2saasExamples {
     }
 
     try {
-      System.out.println("postDb2SaasWhitelist() result:");
-      // begin-post_db2_saas_whitelist
+      System.out.println("postDb2SaasAllowlist() result:");
+      // begin-post_db2_saas_allowlist
       IpAddress ipAddressModel = new IpAddress.Builder()
         .address("127.0.0.1")
         .description("A sample IP address")
         .build();
-      PostDb2SaasWhitelistOptions postDb2SaasWhitelistOptions = new PostDb2SaasWhitelistOptions.Builder()
-        .xDeploymentId("testString")
+      PostDb2SaasAllowlistOptions postDb2SaasAllowlistOptions = new PostDb2SaasAllowlistOptions.Builder()
+        .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
         .ipAddresses(java.util.Arrays.asList(ipAddressModel))
         .build();
 
-      Response<SuccessPostWhitelistIPs> response = db2saasService.postDb2SaasWhitelist(postDb2SaasWhitelistOptions).execute();
-      SuccessPostWhitelistIPs successPostWhitelistIPs = response.getResult();
+      Response<SuccessPostAllowedlistIPs> response = db2saasService.postDb2SaasAllowlist(postDb2SaasAllowlistOptions).execute();
+      SuccessPostAllowedlistIPs successPostAllowedlistIPs = response.getResult();
 
-      System.out.println(successPostWhitelistIPs);
-      // end-post_db2_saas_whitelist
+      System.out.println(successPostAllowedlistIPs);
+      // end-post_db2_saas_allowlist
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
     try {
-      System.out.println("getDb2SaasWhitelist() result:");
-      // begin-get_db2_saas_whitelist
-      GetDb2SaasWhitelistOptions getDb2SaasWhitelistOptions = new GetDb2SaasWhitelistOptions.Builder()
-        .xDeploymentId("testString")
+      System.out.println("getDb2SaasAllowlist() result:");
+      // begin-get_db2_saas_allowlist
+      GetDb2SaasAllowlistOptions getDb2SaasAllowlistOptions = new GetDb2SaasAllowlistOptions.Builder()
+        .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
         .build();
 
-      Response<SuccessGetWhitelistIPs> response = db2saasService.getDb2SaasWhitelist(getDb2SaasWhitelistOptions).execute();
-      SuccessGetWhitelistIPs successGetWhitelistIPs = response.getResult();
+      Response<SuccessGetAllowlistIPs> response = db2saasService.getDb2SaasAllowlist(getDb2SaasAllowlistOptions).execute();
+      SuccessGetAllowlistIPs successGetAllowlistIPs = response.getResult();
 
-      System.out.println(successGetWhitelistIPs);
-      // end-get_db2_saas_whitelist
+      System.out.println(successGetAllowlistIPs);
+      // end-get_db2_saas_allowlist
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
@@ -139,7 +137,7 @@ public class Db2saasExamples {
         .policyId("Default")
         .build();
       PostDb2SaasUserOptions postDb2SaasUserOptions = new PostDb2SaasUserOptions.Builder()
-        .xDeploymentId("testString")
+        .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
         .id("test-user")
         .iam(false)
         .ibmid("test-ibm-id")
@@ -165,7 +163,7 @@ public class Db2saasExamples {
       System.out.println("getDb2SaasUser() result:");
       // begin-get_db2_saas_user
       GetDb2SaasUserOptions getDb2SaasUserOptions = new GetDb2SaasUserOptions.Builder()
-        .xDeploymentId("testString")
+        .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
         .build();
 
       Response<SuccessGetUserInfo> response = db2saasService.getDb2SaasUser(getDb2SaasUserOptions).execute();
@@ -179,38 +177,10 @@ public class Db2saasExamples {
     }
 
     try {
-      System.out.println("putDb2SaasUser() result:");
-      // begin-put_db2_saas_user
-      UpdateUserAuthentication updateUserAuthenticationModel = new UpdateUserAuthentication.Builder()
-        .build();
-      PutDb2SaasUserOptions putDb2SaasUserOptions = new PutDb2SaasUserOptions.Builder()
-        .xDeploymentId("testString")
-        .id("test-user")
-        .newId("test-user")
-        .newName("test_user")
-        .newOldPassword("dEkMc43@gfAPl!867^dSbu")
-        .newNewPassword("ihbgc26@gfAPl!1297^dFGy")
-        .newRole("bluuser")
-        .newEmail("test_user@mycompany.com")
-        .newLocked("no")
-        .newAuthentication(updateUserAuthenticationModel)
-        .build();
-
-      Response<SuccessUserResponse> response = db2saasService.putDb2SaasUser(putDb2SaasUserOptions).execute();
-      SuccessUserResponse successUserResponse = response.getResult();
-
-      System.out.println(successUserResponse);
-      // end-put_db2_saas_user
-    } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    }
-
-    try {
       System.out.println("getbyidDb2SaasUser() result:");
       // begin-getbyid_db2_saas_user
       GetbyidDb2SaasUserOptions getbyidDb2SaasUserOptions = new GetbyidDb2SaasUserOptions.Builder()
-        .xDeploymentId("testString")
+        .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
         .build();
 
       Response<SuccessGetUserByID> response = db2saasService.getbyidDb2SaasUser(getbyidDb2SaasUserOptions).execute();
@@ -227,7 +197,7 @@ public class Db2saasExamples {
       System.out.println("putDb2SaasAutoscale() result:");
       // begin-put_db2_saas_autoscale
       PutDb2SaasAutoscaleOptions putDb2SaasAutoscaleOptions = new PutDb2SaasAutoscaleOptions.Builder()
-        .xDeploymentId("testString")
+        .xDbProfile("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
         .build();
 
       Response<SuccessUpdateAutoScale> response = db2saasService.putDb2SaasAutoscale(putDb2SaasAutoscaleOptions).execute();
@@ -244,7 +214,7 @@ public class Db2saasExamples {
       System.out.println("getDb2SaasAutoscale() result:");
       // begin-get_db2_saas_autoscale
       GetDb2SaasAutoscaleOptions getDb2SaasAutoscaleOptions = new GetDb2SaasAutoscaleOptions.Builder()
-        .xDeploymentId("testString")
+        .xDbProfile("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
         .build();
 
       Response<SuccessAutoScaling> response = db2saasService.getDb2SaasAutoscale(getDb2SaasAutoscaleOptions).execute();
@@ -261,7 +231,7 @@ public class Db2saasExamples {
       System.out.println("deleteDb2SaasUser() result:");
       // begin-delete_db2_saas_user
       DeleteDb2SaasUserOptions deleteDb2SaasUserOptions = new DeleteDb2SaasUserOptions.Builder()
-        .xDeploymentId("testString")
+        .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
         .id("test-user")
         .build();
 

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,7 +13,6 @@
 
 package github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model;
 
-import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
@@ -23,9 +22,6 @@ public class SuccessConnectionInfoPublic extends GenericModel {
 
   protected String hostname;
   protected String databaseName;
-  @SerializedName("host_ros")
-  protected String hostRos;
-  protected String certificateBase64;
   protected String sslPort;
   protected Boolean ssl;
   protected String databaseVersion;
@@ -48,24 +44,6 @@ public class SuccessConnectionInfoPublic extends GenericModel {
    */
   public String getDatabaseName() {
     return databaseName;
-  }
-
-  /**
-   * Gets the hostRos.
-   *
-   * @return the hostRos
-   */
-  public String getHostRos() {
-    return hostRos;
-  }
-
-  /**
-   * Gets the certificateBase64.
-   *
-   * @return the certificateBase64
-   */
-  public String getCertificateBase64() {
-    return certificateBase64;
   }
 
   /**

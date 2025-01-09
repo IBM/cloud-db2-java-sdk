@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -34,8 +34,6 @@ public class SuccessConnectionInfoPublicTest {
     SuccessConnectionInfoPublic successConnectionInfoPublicModel = new SuccessConnectionInfoPublic();
     assertNull(successConnectionInfoPublicModel.getHostname());
     assertNull(successConnectionInfoPublicModel.getDatabaseName());
-    assertNull(successConnectionInfoPublicModel.getHostRos());
-    assertNull(successConnectionInfoPublicModel.getCertificateBase64());
     assertNull(successConnectionInfoPublicModel.getSslPort());
     assertNull(successConnectionInfoPublicModel.isSsl());
     assertNull(successConnectionInfoPublicModel.getDatabaseVersion());

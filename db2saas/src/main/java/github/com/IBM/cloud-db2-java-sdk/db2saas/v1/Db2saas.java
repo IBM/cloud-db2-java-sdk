@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -27,21 +27,20 @@ import com.ibm.cloud.sdk.core.service.BaseService;
 import com.ibm.cloud.sdk.core.util.ResponseConverterUtils;
 import github.com/IBM/cloud-db2-java-sdk.common.SdkCommon;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.DeleteDb2SaasUserOptions;
+import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetDb2SaasAllowlistOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetDb2SaasAutoscaleOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetDb2SaasConnectionInfoOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetDb2SaasUserOptions;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetDb2SaasWhitelistOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetbyidDb2SaasUserOptions;
+import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.PostDb2SaasAllowlistOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.PostDb2SaasUserOptions;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.PostDb2SaasWhitelistOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.PutDb2SaasAutoscaleOptions;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.PutDb2SaasUserOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessAutoScaling;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessConnectionInfo;
+import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessGetAllowlistIPs;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessGetUserByID;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessGetUserInfo;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessGetWhitelistIPs;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessPostWhitelistIPs;
+import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessPostAllowedlistIPs;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessUpdateAutoScale;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessUserResponse;
 import java.util.HashMap;
@@ -156,47 +155,47 @@ public class Db2saas extends BaseService {
   }
 
   /**
-   * Whitelisting of new IPs.
+   * Allow listing of new IPs.
    *
-   * @param postDb2SaasWhitelistOptions the {@link PostDb2SaasWhitelistOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link SuccessPostWhitelistIPs}
+   * @param postDb2SaasAllowlistOptions the {@link PostDb2SaasAllowlistOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link SuccessPostAllowedlistIPs}
    */
-  public ServiceCall<SuccessPostWhitelistIPs> postDb2SaasWhitelist(PostDb2SaasWhitelistOptions postDb2SaasWhitelistOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(postDb2SaasWhitelistOptions,
-      "postDb2SaasWhitelistOptions cannot be null");
+  public ServiceCall<SuccessPostAllowedlistIPs> postDb2SaasAllowlist(PostDb2SaasAllowlistOptions postDb2SaasAllowlistOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(postDb2SaasAllowlistOptions,
+      "postDb2SaasAllowlistOptions cannot be null");
     RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/dbsettings/whitelistips"));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("db2saas", "v1", "postDb2SaasWhitelist");
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("db2saas", "v1", "postDb2SaasAllowlist");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
     builder.header("Accept", "application/json");
-    builder.header("x-deployment-id", postDb2SaasWhitelistOptions.xDeploymentId());
+    builder.header("x-deployment-id", postDb2SaasAllowlistOptions.xDeploymentId());
     final JsonObject contentJson = new JsonObject();
-    contentJson.add("ip_addresses", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(postDb2SaasWhitelistOptions.ipAddresses()));
+    contentJson.add("ip_addresses", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(postDb2SaasAllowlistOptions.ipAddresses()));
     builder.bodyJson(contentJson);
-    ResponseConverter<SuccessPostWhitelistIPs> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<SuccessPostWhitelistIPs>() { }.getType());
+    ResponseConverter<SuccessPostAllowedlistIPs> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<SuccessPostAllowedlistIPs>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
   /**
-   * Get whitelisted IPs.
+   * Get allowed list of IPs.
    *
-   * @param getDb2SaasWhitelistOptions the {@link GetDb2SaasWhitelistOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link SuccessGetWhitelistIPs}
+   * @param getDb2SaasAllowlistOptions the {@link GetDb2SaasAllowlistOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link SuccessGetAllowlistIPs}
    */
-  public ServiceCall<SuccessGetWhitelistIPs> getDb2SaasWhitelist(GetDb2SaasWhitelistOptions getDb2SaasWhitelistOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(getDb2SaasWhitelistOptions,
-      "getDb2SaasWhitelistOptions cannot be null");
+  public ServiceCall<SuccessGetAllowlistIPs> getDb2SaasAllowlist(GetDb2SaasAllowlistOptions getDb2SaasAllowlistOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getDb2SaasAllowlistOptions,
+      "getDb2SaasAllowlistOptions cannot be null");
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/dbsettings/whitelistips"));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("db2saas", "v1", "getDb2SaasWhitelist");
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("db2saas", "v1", "getDb2SaasAllowlist");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
     builder.header("Accept", "application/json");
-    builder.header("x-deployment-id", getDb2SaasWhitelistOptions.xDeploymentId());
-    ResponseConverter<SuccessGetWhitelistIPs> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<SuccessGetWhitelistIPs>() { }.getType());
+    builder.header("x-deployment-id", getDb2SaasAllowlistOptions.xDeploymentId());
+    ResponseConverter<SuccessGetAllowlistIPs> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<SuccessGetAllowlistIPs>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -250,42 +249,6 @@ public class Db2saas extends BaseService {
     builder.header("x-deployment-id", getDb2SaasUserOptions.xDeploymentId());
     ResponseConverter<SuccessGetUserInfo> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<SuccessGetUserInfo>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Update the details of existing user.
-   *
-   * @param putDb2SaasUserOptions the {@link PutDb2SaasUserOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link SuccessUserResponse}
-   */
-  public ServiceCall<SuccessUserResponse> putDb2SaasUser(PutDb2SaasUserOptions putDb2SaasUserOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(putDb2SaasUserOptions,
-      "putDb2SaasUserOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("id", putDb2SaasUserOptions.id());
-    RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/users/{id}", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("db2saas", "v1", "putDb2SaasUser");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    builder.header("x-deployment-id", putDb2SaasUserOptions.xDeploymentId());
-    final JsonObject contentJson = new JsonObject();
-    contentJson.addProperty("id", putDb2SaasUserOptions.newId());
-    contentJson.addProperty("name", putDb2SaasUserOptions.newName());
-    contentJson.addProperty("old_password", putDb2SaasUserOptions.newOldPassword());
-    contentJson.addProperty("new_password", putDb2SaasUserOptions.newNewPassword());
-    contentJson.addProperty("role", putDb2SaasUserOptions.newRole());
-    contentJson.addProperty("email", putDb2SaasUserOptions.newEmail());
-    contentJson.addProperty("locked", putDb2SaasUserOptions.newLocked());
-    contentJson.add("authentication", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(putDb2SaasUserOptions.newAuthentication()));
-    if (putDb2SaasUserOptions.newIbmid() != null) {
-      contentJson.addProperty("ibmid", putDb2SaasUserOptions.newIbmid());
-    }
-    builder.bodyJson(contentJson);
-    ResponseConverter<SuccessUserResponse> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<SuccessUserResponse>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -348,7 +311,7 @@ public class Db2saas extends BaseService {
       builder.header(header.getKey(), header.getValue());
     }
     builder.header("Accept", "application/json");
-    builder.header("x-deployment-id", putDb2SaasAutoscaleOptions.xDeploymentId());
+    builder.header("x-db-profile", putDb2SaasAutoscaleOptions.xDbProfile());
     final JsonObject contentJson = new JsonObject();
     if (putDb2SaasAutoscaleOptions.autoScalingEnabled() != null) {
       contentJson.addProperty("auto_scaling_enabled", putDb2SaasAutoscaleOptions.autoScalingEnabled());
@@ -380,13 +343,13 @@ public class Db2saas extends BaseService {
   public ServiceCall<SuccessAutoScaling> getDb2SaasAutoscale(GetDb2SaasAutoscaleOptions getDb2SaasAutoscaleOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getDb2SaasAutoscaleOptions,
       "getDb2SaasAutoscaleOptions cannot be null");
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/scaling/auto"));
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/manage/scaling/auto"));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("db2saas", "v1", "getDb2SaasAutoscale");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
     builder.header("Accept", "application/json");
-    builder.header("x-deployment-id", getDb2SaasAutoscaleOptions.xDeploymentId());
+    builder.header("x-db-profile", getDb2SaasAutoscaleOptions.xDbProfile());
     ResponseConverter<SuccessAutoScaling> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<SuccessAutoScaling>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);

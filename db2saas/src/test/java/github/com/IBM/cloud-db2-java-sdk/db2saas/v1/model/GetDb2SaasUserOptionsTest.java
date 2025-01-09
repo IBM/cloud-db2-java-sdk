@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,9 +32,9 @@ public class GetDb2SaasUserOptionsTest {
   @Test
   public void testGetDb2SaasUserOptions() throws Throwable {
     GetDb2SaasUserOptions getDb2SaasUserOptionsModel = new GetDb2SaasUserOptions.Builder()
-      .xDeploymentId("testString")
+      .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
       .build();
-    assertEquals(getDb2SaasUserOptionsModel.xDeploymentId(), "testString");
+    assertEquals(getDb2SaasUserOptionsModel.xDeploymentId(), "crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

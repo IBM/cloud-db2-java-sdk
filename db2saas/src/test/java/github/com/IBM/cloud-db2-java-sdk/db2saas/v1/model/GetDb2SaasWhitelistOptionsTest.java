@@ -32,9 +32,9 @@ public class GetDb2SaasWhitelistOptionsTest {
   @Test
   public void testGetDb2SaasWhitelistOptions() throws Throwable {
     GetDb2SaasWhitelistOptions getDb2SaasWhitelistOptionsModel = new GetDb2SaasWhitelistOptions.Builder()
-      .xDeploymentId("testString")
+      .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
       .build();
-    assertEquals(getDb2SaasWhitelistOptionsModel.xDeploymentId(), "testString");
+    assertEquals(getDb2SaasWhitelistOptionsModel.xDeploymentId(), "crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -20,31 +20,29 @@ import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.Db2saas;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.CreateUserAuthentication;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.DeleteDb2SaasUserOptions;
+import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetDb2SaasAllowlistOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetDb2SaasAutoscaleOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetDb2SaasConnectionInfoOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetDb2SaasUserOptions;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetDb2SaasWhitelistOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.GetbyidDb2SaasUserOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.IpAddress;
+import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.PostDb2SaasAllowlistOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.PostDb2SaasUserOptions;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.PostDb2SaasWhitelistOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.PutDb2SaasAutoscaleOptions;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.PutDb2SaasUserOptions;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessAutoScaling;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessConnectionInfo;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessConnectionInfoPrivate;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessConnectionInfoPublic;
+import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessGetAllowlistIPs;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessGetUserByID;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessGetUserByIDAuthentication;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessGetUserInfo;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessGetUserInfoResourcesItem;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessGetUserInfoResourcesItemAuthentication;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessGetWhitelistIPs;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessPostWhitelistIPs;
+import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessPostAllowedlistIPs;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessUpdateAutoScale;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessUserResponse;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.SuccessUserResponseAuthentication;
-import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.model.UpdateUserAuthentication;
 import github.com/IBM/cloud-db2-java-sdk.db2saas.v1.utils.TestUtilities;
 import java.io.IOException;
 import java.io.InputStream;
@@ -98,8 +96,8 @@ public class Db2saasTest {
   @Test
   public void testGetDb2SaasConnectionInfoWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"public\": {\"hostname\": \"84792aeb-2a9c-4dee-bfad-2e529f16945d-useast-private.bt1ibm.dev.db2.ibmappdomain.cloud\", \"databaseName\": \"bluedb\", \"host_ros\": \"84792aeb-2a9c-4dee-bfad-2e529f16945d-useast-private.bt1ibm.dev.db2.ibmappdomain.cloud:30515\", \"certificateBase64\": \"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURIVENDQWdXZ0F3SUJBZ0lVTGRpR1U2QzdZajMwcS9VUVB3ek5ka2YyakJjd0RRWUpLb1pJaHZjTkFRRUwKQlFBd0hqRWNNQm9HQTFVRUF3d1RTVUpOSUVOc2IzVmtJRVJoZEdGaVlYTmxjekFlRncweU1EQTRNRFl3T1RReQpNVEZhRncwek1EQTRNRFF3T1RReU1URmFNQjR4SERBYUJnTlZCQU1NRTBsQ1RTQkRiRzkxWkNCRVlYUmhZbUZ6ClpYTXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCRHdBd2dnRUtBb0lCQVFDb1NIdS9TWkd5NHc0bHB0elQKbFVRQTV6Q0krTldhblQ0czAvTXFkQmJwRW9FWjYxLy9VQVFPaHVTUG85M05obG1NQWZUWENpUi9jVkxuQmxBMQpuZnEzcC9pWm1VMnJwSUxnUmdLeTdsNEZSMVVPaGlRa3RnN3d6Q0J1M2k0bTRJQkZ0NVVvRng5djl6eFkrK0tSCnNnYXhmK28yMEoxLzZBSHFwem5GaWJuTDdLcGlZMUs1c25BdHFwTUVsNHMyR3dlZXQ0dEFjZ3hRSlRVR3hvamsKUDMvUmtxSUI1RFBNSXJ0ZFMrWWpBdlM0alBpREVRT0FvZDg5aDBOays3bkpldllJT0lRVTN0OC81YlNYRDFFVwp3bmRqdHlkeC95Qlo5YlZ4bms4eWI1S1NCVUNpaHJsL1AxVmdNdStLb2w2M0ZZMmdSbndwb3FEOVRNWkJkeTRYCk5PRUZBZ01CQUFHalV6QlJNQjBHQTFVZERnUVdCQlNldmNpblMvR0VwdmlmZkQ0ZUtPU0FNSGljUmpBZkJnTlYKSFNNRUdEQVdnQlNldmNpblMvR0VwdmlmZkQ0ZUtPU0FNSGljUmpBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUEwRwpDU3FHU0liM0RRRUJDd1VBQTRJQkFRQk1XRHV2Z0JKVk5JYUp2NkFzL3FybWZKbVJObU80clhVcXhiTXdJdEZ1Ciswb1RIOTZMWU1OSjgyS1hXOFc1K0ZUOXJ2TjdzQzhRQzBYVzFIWkM4dlgvdE96dmluL1lqVW5nUlducUFBQXEKL0U4TnRtMFpuMEs4cnRzanJtaklLKzlwNjRObE1ENWJjcUpDMGZFSkpBQVpBSUozejRNSHhsTDhnc0plS0JyOApvcWhhejJOaXJtSEZ3Z3RDc0htVlI4UCt5TUtrN24xVlhlcmpHYWhORkQ2MzhGRnRoSHNvNmV0NGQ5NEpLTXFPCmt1cWhFOCtMcTZlalRWUTRYdldaUG4wVWlZQkVpTjFsT1JaZ0h5d3JvNjJ5Z2dFekhCaXF5dEI2SEN6TllyYXoKVElQUTNGanhGQXNYU3NhVzZPL2VteERNSDN4ZUZ5WmRZWWw5bGMxSnFVWW4KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=\", \"sslPort\": \"30450\", \"ssl\": true, \"databaseVersion\": \"11.5.0\"}, \"private\": {\"hostname\": \"84792aeb-2a9c-4dee-bfad-2e529f16945d-useast.bt1ibm.dev.db2.ibmappdomain.cloud\", \"databaseName\": \"bluedb\", \"host_ros\": \"84792aeb-2a9c-4dee-bfad-2e529f16945d-useast.bt1ibm.dev.db2.ibmappdomain.cloud:30515\", \"certificateBase64\": \"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURIVENDQWdXZ0F3SUJBZ0lVTGRpR1U2QzdZajMwcS9VUVB3ek5ka2YyakJjd0RRWUpLb1pJaHZjTkFRRUwKQlFBd0hqRWNNQm9HQTFVRUF3d1RTVUpOSUVOc2IzVmtJRVJoZEdGaVlYTmxjekFlRncweU1EQTRNRFl3T1RReQpNVEZhRncwek1EQTRNRFF3T1RReU1URmFNQjR4SERBYUJnTlZCQU1NRTBsQ1RTQkRiRzkxWkNCRVlYUmhZbUZ6ClpYTXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCRHdBd2dnRUtBb0lCQVFDb1NIdS9TWkd5NHc0bHB0elQKbFVRQTV6Q0krTldhblQ0czAvTXFkQmJwRW9FWjYxLy9VQVFPaHVTUG85M05obG1NQWZUWENpUi9jVkxuQmxBMQpuZnEzcC9pWm1VMnJwSUxnUmdLeTdsNEZSMVVPaGlRa3RnN3d6Q0J1M2k0bTRJQkZ0NVVvRng5djl6eFkrK0tSCnNnYXhmK28yMEoxLzZBSHFwem5GaWJuTDdLcGlZMUs1c25BdHFwTUVsNHMyR3dlZXQ0dEFjZ3hRSlRVR3hvamsKUDMvUmtxSUI1RFBNSXJ0ZFMrWWpBdlM0alBpREVRT0FvZDg5aDBOays3bkpldllJT0lRVTN0OC81YlNYRDFFVwp3bmRqdHlkeC95Qlo5YlZ4bms4eWI1S1NCVUNpaHJsL1AxVmdNdStLb2w2M0ZZMmdSbndwb3FEOVRNWkJkeTRYCk5PRUZBZ01CQUFHalV6QlJNQjBHQTFVZERnUVdCQlNldmNpblMvR0VwdmlmZkQ0ZUtPU0FNSGljUmpBZkJnTlYKSFNNRUdEQVdnQlNldmNpblMvR0VwdmlmZkQ0ZUtPU0FNSGljUmpBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUEwRwpDU3FHU0liM0RRRUJDd1VBQTRJQkFRQk1XRHV2Z0JKVk5JYUp2NkFzL3FybWZKbVJObU80clhVcXhiTXdJdEZ1Ciswb1RIOTZMWU1OSjgyS1hXOFc1K0ZUOXJ2TjdzQzhRQzBYVzFIWkM4dlgvdE96dmluL1lqVW5nUlducUFBQXEKL0U4TnRtMFpuMEs4cnRzanJtaklLKzlwNjRObE1ENWJjcUpDMGZFSkpBQVpBSUozejRNSHhsTDhnc0plS0JyOApvcWhhejJOaXJtSEZ3Z3RDc0htVlI4UCt5TUtrN24xVlhlcmpHYWhORkQ2MzhGRnRoSHNvNmV0NGQ5NEpLTXFPCmt1cWhFOCtMcTZlalRWUTRYdldaUG4wVWlZQkVpTjFsT1JaZ0h5d3JvNjJ5Z2dFekhCaXF5dEI2SEN6TllyYXoKVElQUTNGanhGQXNYU3NhVzZPL2VteERNSDN4ZUZ5WmRZWWw5bGMxSnFVWW4KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=\", \"sslPort\": \"30450\", \"ssl\": true, \"databaseVersion\": \"11.5.0\"}}";
-    String getDb2SaasConnectionInfoPath = "/connectioninfo/testString";
+    String mockResponseBody = "{\"public\": {\"hostname\": \"84792aeb-2a9c-4dee-bfad-2e529f16945d-useast-private.bt1ibm.dev.db2.ibmappdomain.cloud\", \"databaseName\": \"bluedb\", \"sslPort\": \"30450\", \"ssl\": true, \"databaseVersion\": \"11.5.0\"}, \"private\": {\"hostname\": \"84792aeb-2a9c-4dee-bfad-2e529f16945d-useast.bt1ibm.dev.db2.ibmappdomain.cloud\", \"databaseName\": \"bluedb\", \"sslPort\": \"30450\", \"ssl\": true, \"databaseVersion\": \"11.5.0\", \"private_serviceName\": \"us-south-private.db2oc.test.saas.ibm.com:32764\", \"cloud_service_offering\": \"dashdb-for-transactions\", \"vpe_service_crn\": \"crn:v1:staging:public:dashdb-for-transactions:us-south:::endpoint:feea41a1-ff88-4541-8865-0698ccb7c5dc-us-south-private.bt1ibm.dev.db2.ibmappdomain.cloud\", \"db_vpc_endpoint_service\": \"feea41a1-ff88-4541-8865-0698ccb7c5dc-ussouth-private.bt1ibm.dev.db2.ibmappdomain.cloud:32679\"}}";
+    String getDb2SaasConnectionInfoPath = "/connectioninfo/crn%253Av1%253Astaging%253Apublic%253Adashdb-for-transactions%253Aus-south%253Aa%252Fe7e3e87b512f474381c0684a5ecbba03%253A69db420f-33d5-4953-8bd8-1950abd356f6%253A%253A";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -107,8 +105,8 @@ public class Db2saasTest {
 
     // Construct an instance of the GetDb2SaasConnectionInfoOptions model
     GetDb2SaasConnectionInfoOptions getDb2SaasConnectionInfoOptionsModel = new GetDb2SaasConnectionInfoOptions.Builder()
-      .deploymentId("testString")
-      .xDeploymentId("testString")
+      .deploymentId("crn%3Av1%3Astaging%3Apublic%3Adashdb-for-transactions%3Aus-south%3Aa%2Fe7e3e87b512f474381c0684a5ecbba03%3A69db420f-33d5-4953-8bd8-1950abd356f6%3A%3A")
+      .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
       .build();
 
     // Invoke getDb2SaasConnectionInfo() with a valid options model and verify the result
@@ -125,7 +123,7 @@ public class Db2saasTest {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getDb2SaasConnectionInfoPath);
     // Verify header parameters
-    assertEquals(request.getHeader("X-Deployment-Id"), "testString");
+    assertEquals(request.getHeader("X-Deployment-Id"), "crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::");
     // Verify that there is no query string
     Map<String, String> query = TestUtilities.parseQueryString(request);
     assertNull(query);
@@ -148,12 +146,12 @@ public class Db2saasTest {
     db2saasService.getDb2SaasConnectionInfo(null).execute();
   }
 
-  // Test the postDb2SaasWhitelist operation with a valid options model parameter
+  // Test the postDb2SaasAllowlist operation with a valid options model parameter
   @Test
-  public void testPostDb2SaasWhitelistWOptions() throws Throwable {
+  public void testPostDb2SaasAllowlistWOptions() throws Throwable {
     // Register a mock response
     String mockResponseBody = "{\"status\": \"status\"}";
-    String postDb2SaasWhitelistPath = "/dbsettings/whitelistips";
+    String postDb2SaasAllowlistPath = "/dbsettings/whitelistips";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -165,16 +163,16 @@ public class Db2saasTest {
       .description("A sample IP address")
       .build();
 
-    // Construct an instance of the PostDb2SaasWhitelistOptions model
-    PostDb2SaasWhitelistOptions postDb2SaasWhitelistOptionsModel = new PostDb2SaasWhitelistOptions.Builder()
-      .xDeploymentId("testString")
+    // Construct an instance of the PostDb2SaasAllowlistOptions model
+    PostDb2SaasAllowlistOptions postDb2SaasAllowlistOptionsModel = new PostDb2SaasAllowlistOptions.Builder()
+      .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
       .ipAddresses(java.util.Arrays.asList(ipAddressModel))
       .build();
 
-    // Invoke postDb2SaasWhitelist() with a valid options model and verify the result
-    Response<SuccessPostWhitelistIPs> response = db2saasService.postDb2SaasWhitelist(postDb2SaasWhitelistOptionsModel).execute();
+    // Invoke postDb2SaasAllowlist() with a valid options model and verify the result
+    Response<SuccessPostAllowedlistIPs> response = db2saasService.postDb2SaasAllowlist(postDb2SaasAllowlistOptionsModel).execute();
     assertNotNull(response);
-    SuccessPostWhitelistIPs responseObj = response.getResult();
+    SuccessPostAllowedlistIPs responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request sent to the mock server
@@ -183,51 +181,51 @@ public class Db2saasTest {
     assertEquals(request.getMethod(), "POST");
     // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, postDb2SaasWhitelistPath);
+    assertEquals(parsedPath, postDb2SaasAllowlistPath);
     // Verify header parameters
-    assertEquals(request.getHeader("X-Deployment-Id"), "testString");
+    assertEquals(request.getHeader("X-Deployment-Id"), "crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::");
     // Verify that there is no query string
     Map<String, String> query = TestUtilities.parseQueryString(request);
     assertNull(query);
   }
 
-  // Test the postDb2SaasWhitelist operation with and without retries enabled
+  // Test the postDb2SaasAllowlist operation with and without retries enabled
   @Test
-  public void testPostDb2SaasWhitelistWRetries() throws Throwable {
+  public void testPostDb2SaasAllowlistWRetries() throws Throwable {
     db2saasService.enableRetries(4, 30);
-    testPostDb2SaasWhitelistWOptions();
+    testPostDb2SaasAllowlistWOptions();
 
     db2saasService.disableRetries();
-    testPostDb2SaasWhitelistWOptions();
+    testPostDb2SaasAllowlistWOptions();
   }
 
-  // Test the postDb2SaasWhitelist operation with a null options model (negative test)
+  // Test the postDb2SaasAllowlist operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testPostDb2SaasWhitelistNoOptions() throws Throwable {
+  public void testPostDb2SaasAllowlistNoOptions() throws Throwable {
     server.enqueue(new MockResponse());
-    db2saasService.postDb2SaasWhitelist(null).execute();
+    db2saasService.postDb2SaasAllowlist(null).execute();
   }
 
-  // Test the getDb2SaasWhitelist operation with a valid options model parameter
+  // Test the getDb2SaasAllowlist operation with a valid options model parameter
   @Test
-  public void testGetDb2SaasWhitelistWOptions() throws Throwable {
+  public void testGetDb2SaasAllowlistWOptions() throws Throwable {
     // Register a mock response
     String mockResponseBody = "{\"ip_addresses\": [{\"address\": \"127.0.0.1\", \"description\": \"A sample IP address\"}]}";
-    String getDb2SaasWhitelistPath = "/dbsettings/whitelistips";
+    String getDb2SaasAllowlistPath = "/dbsettings/whitelistips";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
       .setBody(mockResponseBody));
 
-    // Construct an instance of the GetDb2SaasWhitelistOptions model
-    GetDb2SaasWhitelistOptions getDb2SaasWhitelistOptionsModel = new GetDb2SaasWhitelistOptions.Builder()
-      .xDeploymentId("testString")
+    // Construct an instance of the GetDb2SaasAllowlistOptions model
+    GetDb2SaasAllowlistOptions getDb2SaasAllowlistOptionsModel = new GetDb2SaasAllowlistOptions.Builder()
+      .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
       .build();
 
-    // Invoke getDb2SaasWhitelist() with a valid options model and verify the result
-    Response<SuccessGetWhitelistIPs> response = db2saasService.getDb2SaasWhitelist(getDb2SaasWhitelistOptionsModel).execute();
+    // Invoke getDb2SaasAllowlist() with a valid options model and verify the result
+    Response<SuccessGetAllowlistIPs> response = db2saasService.getDb2SaasAllowlist(getDb2SaasAllowlistOptionsModel).execute();
     assertNotNull(response);
-    SuccessGetWhitelistIPs responseObj = response.getResult();
+    SuccessGetAllowlistIPs responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request sent to the mock server
@@ -236,29 +234,29 @@ public class Db2saasTest {
     assertEquals(request.getMethod(), "GET");
     // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, getDb2SaasWhitelistPath);
+    assertEquals(parsedPath, getDb2SaasAllowlistPath);
     // Verify header parameters
-    assertEquals(request.getHeader("X-Deployment-Id"), "testString");
+    assertEquals(request.getHeader("X-Deployment-Id"), "crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::");
     // Verify that there is no query string
     Map<String, String> query = TestUtilities.parseQueryString(request);
     assertNull(query);
   }
 
-  // Test the getDb2SaasWhitelist operation with and without retries enabled
+  // Test the getDb2SaasAllowlist operation with and without retries enabled
   @Test
-  public void testGetDb2SaasWhitelistWRetries() throws Throwable {
+  public void testGetDb2SaasAllowlistWRetries() throws Throwable {
     db2saasService.enableRetries(4, 30);
-    testGetDb2SaasWhitelistWOptions();
+    testGetDb2SaasAllowlistWOptions();
 
     db2saasService.disableRetries();
-    testGetDb2SaasWhitelistWOptions();
+    testGetDb2SaasAllowlistWOptions();
   }
 
-  // Test the getDb2SaasWhitelist operation with a null options model (negative test)
+  // Test the getDb2SaasAllowlist operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testGetDb2SaasWhitelistNoOptions() throws Throwable {
+  public void testGetDb2SaasAllowlistNoOptions() throws Throwable {
     server.enqueue(new MockResponse());
-    db2saasService.getDb2SaasWhitelist(null).execute();
+    db2saasService.getDb2SaasAllowlist(null).execute();
   }
 
   // Test the postDb2SaasUser operation with a valid options model parameter
@@ -280,7 +278,7 @@ public class Db2saasTest {
 
     // Construct an instance of the PostDb2SaasUserOptions model
     PostDb2SaasUserOptions postDb2SaasUserOptionsModel = new PostDb2SaasUserOptions.Builder()
-      .xDeploymentId("testString")
+      .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
       .id("test-user")
       .iam(false)
       .ibmid("test-ibm-id")
@@ -306,7 +304,7 @@ public class Db2saasTest {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, postDb2SaasUserPath);
     // Verify header parameters
-    assertEquals(request.getHeader("X-Deployment-Id"), "testString");
+    assertEquals(request.getHeader("X-Deployment-Id"), "crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::");
     // Verify that there is no query string
     Map<String, String> query = TestUtilities.parseQueryString(request);
     assertNull(query);
@@ -342,7 +340,7 @@ public class Db2saasTest {
 
     // Construct an instance of the GetDb2SaasUserOptions model
     GetDb2SaasUserOptions getDb2SaasUserOptionsModel = new GetDb2SaasUserOptions.Builder()
-      .xDeploymentId("testString")
+      .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
       .build();
 
     // Invoke getDb2SaasUser() with a valid options model and verify the result
@@ -359,7 +357,7 @@ public class Db2saasTest {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getDb2SaasUserPath);
     // Verify header parameters
-    assertEquals(request.getHeader("X-Deployment-Id"), "testString");
+    assertEquals(request.getHeader("X-Deployment-Id"), "crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::");
     // Verify that there is no query string
     Map<String, String> query = TestUtilities.parseQueryString(request);
     assertNull(query);
@@ -382,75 +380,6 @@ public class Db2saasTest {
     db2saasService.getDb2SaasUser(null).execute();
   }
 
-  // Test the putDb2SaasUser operation with a valid options model parameter
-  @Test
-  public void testPutDb2SaasUserWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"dvRole\": \"dvRole\", \"metadata\": {\"anyKey\": \"anyValue\"}, \"formatedIbmid\": \"formatedIbmid\", \"role\": \"bluadmin\", \"iamid\": \"iamid\", \"permittedActions\": [\"permittedActions\"], \"allClean\": true, \"password\": \"password\", \"iam\": false, \"name\": \"name\", \"ibmid\": \"ibmid\", \"id\": \"id\", \"locked\": \"no\", \"initErrorMsg\": \"initErrorMsg\", \"email\": \"user@host.org\", \"authentication\": {\"method\": \"method\", \"policy_id\": \"policyId\"}}";
-    String putDb2SaasUserPath = "/users/test-user";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the UpdateUserAuthentication model
-    UpdateUserAuthentication updateUserAuthenticationModel = new UpdateUserAuthentication.Builder()
-      .method("internal")
-      .policyId("Default")
-      .build();
-
-    // Construct an instance of the PutDb2SaasUserOptions model
-    PutDb2SaasUserOptions putDb2SaasUserOptionsModel = new PutDb2SaasUserOptions.Builder()
-      .xDeploymentId("testString")
-      .id("test-user")
-      .newId("test-user")
-      .newName("test_user")
-      .newOldPassword("dEkMc43@gfAPl!867^dSbu")
-      .newNewPassword("ihbgc26@gfAPl!1297^dFGy")
-      .newRole("bluuser")
-      .newEmail("test_user@mycompany.com")
-      .newLocked("no")
-      .newAuthentication(updateUserAuthenticationModel)
-      .newIbmid("test-ibm-id")
-      .build();
-
-    // Invoke putDb2SaasUser() with a valid options model and verify the result
-    Response<SuccessUserResponse> response = db2saasService.putDb2SaasUser(putDb2SaasUserOptionsModel).execute();
-    assertNotNull(response);
-    SuccessUserResponse responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "PUT");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, putDb2SaasUserPath);
-    // Verify header parameters
-    assertEquals(request.getHeader("X-Deployment-Id"), "testString");
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the putDb2SaasUser operation with and without retries enabled
-  @Test
-  public void testPutDb2SaasUserWRetries() throws Throwable {
-    db2saasService.enableRetries(4, 30);
-    testPutDb2SaasUserWOptions();
-
-    db2saasService.disableRetries();
-    testPutDb2SaasUserWOptions();
-  }
-
-  // Test the putDb2SaasUser operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testPutDb2SaasUserNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    db2saasService.putDb2SaasUser(null).execute();
-  }
-
   // Test the deleteDb2SaasUser operation with a valid options model parameter
   @Test
   public void testDeleteDb2SaasUserWOptions() throws Throwable {
@@ -464,7 +393,7 @@ public class Db2saasTest {
 
     // Construct an instance of the DeleteDb2SaasUserOptions model
     DeleteDb2SaasUserOptions deleteDb2SaasUserOptionsModel = new DeleteDb2SaasUserOptions.Builder()
-      .xDeploymentId("testString")
+      .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
       .id("test-user")
       .build();
 
@@ -482,7 +411,7 @@ public class Db2saasTest {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, deleteDb2SaasUserPath);
     // Verify header parameters
-    assertEquals(request.getHeader("X-Deployment-Id"), "testString");
+    assertEquals(request.getHeader("X-Deployment-Id"), "crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::");
     // Verify that there is no query string
     Map<String, String> query = TestUtilities.parseQueryString(request);
     assertNull(query);
@@ -518,7 +447,7 @@ public class Db2saasTest {
 
     // Construct an instance of the GetbyidDb2SaasUserOptions model
     GetbyidDb2SaasUserOptions getbyidDb2SaasUserOptionsModel = new GetbyidDb2SaasUserOptions.Builder()
-      .xDeploymentId("testString")
+      .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
       .build();
 
     // Invoke getbyidDb2SaasUser() with a valid options model and verify the result
@@ -535,7 +464,7 @@ public class Db2saasTest {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getbyidDb2SaasUserPath);
     // Verify header parameters
-    assertEquals(request.getHeader("X-Deployment-Id"), "testString");
+    assertEquals(request.getHeader("X-Deployment-Id"), "crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::");
     // Verify that there is no query string
     Map<String, String> query = TestUtilities.parseQueryString(request);
     assertNull(query);
@@ -571,7 +500,7 @@ public class Db2saasTest {
 
     // Construct an instance of the PutDb2SaasAutoscaleOptions model
     PutDb2SaasAutoscaleOptions putDb2SaasAutoscaleOptionsModel = new PutDb2SaasAutoscaleOptions.Builder()
-      .xDeploymentId("testString")
+      .xDbProfile("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
       .autoScalingEnabled("true")
       .autoScalingThreshold(Long.valueOf("90"))
       .autoScalingOverTimePeriod(Double.valueOf("5"))
@@ -593,7 +522,7 @@ public class Db2saasTest {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, putDb2SaasAutoscalePath);
     // Verify header parameters
-    assertEquals(request.getHeader("X-Deployment-Id"), "testString");
+    assertEquals(request.getHeader("X-Db-Profile"), "crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::");
     // Verify that there is no query string
     Map<String, String> query = TestUtilities.parseQueryString(request);
     assertNull(query);
@@ -621,7 +550,7 @@ public class Db2saasTest {
   public void testGetDb2SaasAutoscaleWOptions() throws Throwable {
     // Register a mock response
     String mockResponseBody = "{\"auto_scaling_allow_plan_limit\": false, \"auto_scaling_enabled\": true, \"auto_scaling_max_storage\": 21, \"auto_scaling_over_time_period\": 25, \"auto_scaling_pause_limit\": 21, \"auto_scaling_threshold\": 20, \"storage_unit\": \"storageUnit\", \"storage_utilization_percentage\": 28, \"support_auto_scaling\": true}";
-    String getDb2SaasAutoscalePath = "/scaling/auto";
+    String getDb2SaasAutoscalePath = "/manage/scaling/auto";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -629,7 +558,7 @@ public class Db2saasTest {
 
     // Construct an instance of the GetDb2SaasAutoscaleOptions model
     GetDb2SaasAutoscaleOptions getDb2SaasAutoscaleOptionsModel = new GetDb2SaasAutoscaleOptions.Builder()
-      .xDeploymentId("testString")
+      .xDbProfile("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
       .build();
 
     // Invoke getDb2SaasAutoscale() with a valid options model and verify the result
@@ -646,7 +575,7 @@ public class Db2saasTest {
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getDb2SaasAutoscalePath);
     // Verify header parameters
-    assertEquals(request.getHeader("X-Deployment-Id"), "testString");
+    assertEquals(request.getHeader("X-Db-Profile"), "crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::");
     // Verify that there is no query string
     Map<String, String> query = TestUtilities.parseQueryString(request);
     assertNull(query);

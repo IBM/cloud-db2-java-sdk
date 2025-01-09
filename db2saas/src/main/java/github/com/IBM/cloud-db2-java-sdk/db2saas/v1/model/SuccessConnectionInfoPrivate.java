@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -23,12 +23,17 @@ public class SuccessConnectionInfoPrivate extends GenericModel {
 
   protected String hostname;
   protected String databaseName;
-  @SerializedName("host_ros")
-  protected String hostRos;
-  protected String certificateBase64;
   protected String sslPort;
   protected Boolean ssl;
   protected String databaseVersion;
+  @SerializedName("private_serviceName")
+  protected String privateServiceName;
+  @SerializedName("cloud_service_offering")
+  protected String cloudServiceOffering;
+  @SerializedName("vpe_service_crn")
+  protected String vpeServiceCrn;
+  @SerializedName("db_vpc_endpoint_service")
+  protected String dbVpcEndpointService;
 
   protected SuccessConnectionInfoPrivate() { }
 
@@ -48,24 +53,6 @@ public class SuccessConnectionInfoPrivate extends GenericModel {
    */
   public String getDatabaseName() {
     return databaseName;
-  }
-
-  /**
-   * Gets the hostRos.
-   *
-   * @return the hostRos
-   */
-  public String getHostRos() {
-    return hostRos;
-  }
-
-  /**
-   * Gets the certificateBase64.
-   *
-   * @return the certificateBase64
-   */
-  public String getCertificateBase64() {
-    return certificateBase64;
   }
 
   /**
@@ -93,6 +80,42 @@ public class SuccessConnectionInfoPrivate extends GenericModel {
    */
   public String getDatabaseVersion() {
     return databaseVersion;
+  }
+
+  /**
+   * Gets the privateServiceName.
+   *
+   * @return the privateServiceName
+   */
+  public String getPrivateServiceName() {
+    return privateServiceName;
+  }
+
+  /**
+   * Gets the cloudServiceOffering.
+   *
+   * @return the cloudServiceOffering
+   */
+  public String getCloudServiceOffering() {
+    return cloudServiceOffering;
+  }
+
+  /**
+   * Gets the vpeServiceCrn.
+   *
+   * @return the vpeServiceCrn
+   */
+  public String getVpeServiceCrn() {
+    return vpeServiceCrn;
+  }
+
+  /**
+   * Gets the dbVpcEndpointService.
+   *
+   * @return the dbVpcEndpointService
+   */
+  public String getDbVpcEndpointService() {
+    return dbVpcEndpointService;
   }
 }
 

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -20,13 +20,13 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class GetDb2SaasAutoscaleOptions extends GenericModel {
 
-  protected String xDeploymentId;
+  protected String xDbProfile;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private String xDeploymentId;
+    private String xDbProfile;
 
     /**
      * Instantiates a new Builder from an existing GetDb2SaasAutoscaleOptions instance.
@@ -34,7 +34,7 @@ public class GetDb2SaasAutoscaleOptions extends GenericModel {
      * @param getDb2SaasAutoscaleOptions the instance to initialize the Builder with
      */
     private Builder(GetDb2SaasAutoscaleOptions getDb2SaasAutoscaleOptions) {
-      this.xDeploymentId = getDb2SaasAutoscaleOptions.xDeploymentId;
+      this.xDbProfile = getDb2SaasAutoscaleOptions.xDbProfile;
     }
 
     /**
@@ -46,10 +46,10 @@ public class GetDb2SaasAutoscaleOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param xDeploymentId the xDeploymentId
+     * @param xDbProfile the xDbProfile
      */
-    public Builder(String xDeploymentId) {
-      this.xDeploymentId = xDeploymentId;
+    public Builder(String xDbProfile) {
+      this.xDbProfile = xDbProfile;
     }
 
     /**
@@ -62,13 +62,13 @@ public class GetDb2SaasAutoscaleOptions extends GenericModel {
     }
 
     /**
-     * Set the xDeploymentId.
+     * Set the xDbProfile.
      *
-     * @param xDeploymentId the xDeploymentId
+     * @param xDbProfile the xDbProfile
      * @return the GetDb2SaasAutoscaleOptions builder
      */
-    public Builder xDeploymentId(String xDeploymentId) {
-      this.xDeploymentId = xDeploymentId;
+    public Builder xDbProfile(String xDbProfile) {
+      this.xDbProfile = xDbProfile;
       return this;
     }
   }
@@ -76,9 +76,9 @@ public class GetDb2SaasAutoscaleOptions extends GenericModel {
   protected GetDb2SaasAutoscaleOptions() { }
 
   protected GetDb2SaasAutoscaleOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.xDeploymentId,
-      "xDeploymentId cannot be null");
-    xDeploymentId = builder.xDeploymentId;
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.xDbProfile,
+      "xDbProfile cannot be null");
+    xDbProfile = builder.xDbProfile;
   }
 
   /**
@@ -91,14 +91,14 @@ public class GetDb2SaasAutoscaleOptions extends GenericModel {
   }
 
   /**
-   * Gets the xDeploymentId.
+   * Gets the xDbProfile.
    *
    * CRN deployment id.
    *
-   * @return the xDeploymentId
+   * @return the xDbProfile
    */
-  public String xDeploymentId() {
-    return xDeploymentId;
+  public String xDbProfile() {
+    return xDbProfile;
   }
 }
 

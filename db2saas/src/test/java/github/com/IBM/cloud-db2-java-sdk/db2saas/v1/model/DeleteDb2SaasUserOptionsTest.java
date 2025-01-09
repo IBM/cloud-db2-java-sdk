@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,10 +32,10 @@ public class DeleteDb2SaasUserOptionsTest {
   @Test
   public void testDeleteDb2SaasUserOptions() throws Throwable {
     DeleteDb2SaasUserOptions deleteDb2SaasUserOptionsModel = new DeleteDb2SaasUserOptions.Builder()
-      .xDeploymentId("testString")
+      .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
       .id("test-user")
       .build();
-    assertEquals(deleteDb2SaasUserOptionsModel.xDeploymentId(), "testString");
+    assertEquals(deleteDb2SaasUserOptionsModel.xDeploymentId(), "crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::");
     assertEquals(deleteDb2SaasUserOptionsModel.id(), "test-user");
   }
 
