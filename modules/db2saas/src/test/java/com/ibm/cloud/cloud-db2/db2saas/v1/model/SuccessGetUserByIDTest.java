@@ -1,0 +1,53 @@
+/*
+ * (C) Copyright IBM Corp. 2025.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
+
+package com/ibm/cloud/cloud-db2.db2saas.v1.model;
+
+import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
+import com/ibm/cloud/cloud-db2.db2saas.v1.model.SuccessGetUserByID;
+import com/ibm/cloud/cloud-db2.db2saas.v1.model.SuccessGetUserByIDAuthentication;
+import com/ibm/cloud/cloud-db2.db2saas.v1.utils.TestUtilities;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import org.testng.annotations.Test;
+import static org.testng.Assert.*;
+
+/**
+ * Unit test class for the SuccessGetUserByID model.
+ */
+public class SuccessGetUserByIDTest {
+  final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
+  final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
+
+  @Test
+  public void testSuccessGetUserByID() throws Throwable {
+    SuccessGetUserByID successGetUserByIdModel = new SuccessGetUserByID();
+    assertNull(successGetUserByIdModel.getDvRole());
+    assertNull(successGetUserByIdModel.getMetadata());
+    assertNull(successGetUserByIdModel.getFormatedIbmid());
+    assertNull(successGetUserByIdModel.getRole());
+    assertNull(successGetUserByIdModel.getIamid());
+    assertNull(successGetUserByIdModel.getPermittedActions());
+    assertNull(successGetUserByIdModel.isAllClean());
+    assertNull(successGetUserByIdModel.getPassword());
+    assertNull(successGetUserByIdModel.isIam());
+    assertNull(successGetUserByIdModel.getName());
+    assertNull(successGetUserByIdModel.getIbmid());
+    assertNull(successGetUserByIdModel.getId());
+    assertNull(successGetUserByIdModel.getLocked());
+    assertNull(successGetUserByIdModel.getInitErrorMsg());
+    assertNull(successGetUserByIdModel.getEmail());
+    assertNull(successGetUserByIdModel.getAuthentication());
+  }
+}
