@@ -13,7 +13,7 @@
     <description>Java Client Library to access the IBM Db2 SasS cloud-db2</description>
 
     <!-- >>> Update this field to reflect your project's github URL -->
-    <url>https://github.ibm.com/Spoorthi-Dhananjay/cloud-db2-java-sdk-draft</url>
+    <url>https://github.com/IBM/cloud-db2-java-sdk</url>
 
     <groupId>com.ibm.cloud</groupId>
     <version>99-SNAPSHOT</version>
@@ -101,16 +101,16 @@
     <!-- >>> Update these values to reflect your project -->
     <scm>
         <connection>
-            scm:git:https://github.ibm.com/Spoorthi-Dhananjay/cloud-db2-java-sdk-draft</connection>
+            scm:git:https://github.com/IBM/cloud-db2-java-sdk</connection>
         <developerConnection>
-            scm:git:https://github.ibm.com/Spoorthi-Dhananjay/cloud-db2-java-sdk-draft</developerConnection>
-        <url>https://github.ibm.com/Spoorthi-Dhananjay/cloud-db2-java-sdk-draft/tree/main</url>
+            scm:git:https://github.com/IBM/cloud-db2-java-sdk</developerConnection>
+        <url>https://github.com/IBM/cloud-db2-java-sdk/tree/main</url>
     </scm>
 
     <!-- >>> Update these values to reflect your project -->
     <issueManagement>
         <system>Github</system>
-        <url>https://github.ibm.com/Spoorthi-Dhananjay/cloud-db2-java-sdk-draft/issues</url>
+        <url>https://github.com/IBM/cloud-db2-java-sdk/issues</url>
     </issueManagement>
 
     <!-- >>> Update these values to reflect your project -->
