@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- >>> Replace this with your service category (e.g. "platform-services") -->
-    <artifactId>cloud-db2</artifactId>
+    <artifactId>cloud_db2</artifactId>
 
     <!-- >>> Update this field to reflect your project -->
-    <name>IBM Db2 SaaS cloud-db2 Java SDK</name>
+    <name>IBM Db2 SaaS cloud_db2 Java SDK</name>
 
     <!-- >>> Update this field to reflect your project -->
-    <description>Java Client Library to access the IBM Db2 SasS cloud-db2</description>
+    <description>Java Client Library to access the IBM Db2 SasS cloud_db2</description>
 
     <!-- >>> Update this field to reflect your project's github URL -->
     <url>https://github.com/IBM/cloud-db2-java-sdk</url>
@@ -36,7 +36,7 @@
         <sdk-core-version>9.22.2</sdk-core-version>
 
         <!-- >>> Replace this with the name of your SDK's github repository -->
-        <git-repository-name>cloud-db2-java-sdk-draft</git-repository-name>
+        <git-repository-name>cloud-db2-java-sdk</git-repository-name>
 
         <testng-version>7.10.2</testng-version>
         <okhttp3-version>4.12.0</okhttp3-version>
@@ -77,7 +77,7 @@
 
         <!-- This module should be listed after all the service-related modules
         above -->
-        <module>modules/coverage-reports</module>
+        <!-- <module>modules/coverage-reports</module> -->
 
         <!-- >>> List each service's module here -->
         <module>modules/db2saas</module>
@@ -116,7 +116,7 @@
     <!-- >>> Update these values to reflect your project -->
     <ciManagement>
         <system>Travis-CI</system>
-        <url>https://app.travis-ci.com/github/IBM/cloud-db2-go-sdk</url>
+        <url>https://app.travis-ci.com/github/IBM/cloud-db2-java-sdk</url>
     </ciManagement>
 
     <repositories>
@@ -139,13 +139,13 @@
             <!-- Each module (except "common") should depend on this artifact -->
             <dependency>
                 <!-- >>> Replace this with the common module's artifactId -->
-                <artifactId>cloud-db2-common</artifactId>
+                <artifactId>cloud_db2-common</artifactId>
                 <groupId>${project.groupId}</groupId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <!-- >>> Replace this with the common module's artifactId -->
-                <artifactId>cloud-db2-common</artifactId>
+                <artifactId>cloud_db2-common</artifactId>
                 <groupId>${project.groupId}</groupId>
                 <version>${project.version}</version>
                 <type>test-jar</type>

@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>cloud-db2</artifactId>
+        <artifactId>cloud_db2</artifactId>
         <groupId>com.ibm.cloud</groupId>
         <version>99-SNAPSHOT</version>
         <relativePath>../..</relativePath>
     </parent>
 
-    <artifactId>cloud-db2-examples</artifactId>
+    <artifactId>cloud_db2-examples</artifactId>
     <packaging>jar</packaging>
     <name>Code Examples</name>
 
@@ -49,7 +49,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.ibm.cloud.cloud-db2.db2saas.v1.Db2saasExamples</mainClass>
+                            <mainClass>com.ibm.cloud.cloud_db2.db2saas.v1.Db2saasExamples</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
