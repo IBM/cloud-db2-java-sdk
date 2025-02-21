@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>cloud-db2</artifactId>
+        <artifactId>cloud_db2</artifactId>
         <groupId>com.ibm.cloud</groupId>
         <version>99-SNAPSHOT</version>
         <relativePath>../..</relativePath>
@@ -20,11 +20,11 @@
             <artifactId>sdk-core</artifactId>
         </dependency>
         <dependency>
-            <artifactId>cloud-db2-common</artifactId>
+            <artifactId>cloud_db2-common</artifactId>
             <groupId>com.ibm.cloud</groupId>
         </dependency>
         <dependency>
-            <artifactId>cloud-db2-common</artifactId>
+            <artifactId>cloud_db2-common</artifactId>
             <groupId>com.ibm.cloud</groupId>
             <type>test-jar</type>
             <classifier>tests</classifier>

@@ -5,14 +5,14 @@
 
     <parent>
         <!-- >>> Replace this with the parent pom's artifactId -->
-        <artifactId>cloud-db2</artifactId>
+        <artifactId>cloud_db2</artifactId>
         <groupId>com.ibm.cloud</groupId>
         <version>99-SNAPSHOT</version>
         <relativePath>../..</relativePath>
     </parent>
 
     <!-- >>> Replace this with the common module's artifactId (e.g. platform-services-common) -->
-    <artifactId>cloud-db2-common</artifactId>
+    <artifactId>cloud_db2-common</artifactId>
 
     <!-- >>> Replace this with the common module's description (e.g. Platform Services Common Library) -->
     <name>Cloud Db2 Common Library</name>

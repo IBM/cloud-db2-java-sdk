@@ -37,7 +37,7 @@ public class SdkCommon {
     private static String version;
 
     // >>> Replace "my-services" with the parent project's artifactId (e.g. platform-services)
-    private static String parentArtifactId = "cloud-db2";
+    private static String parentArtifactId = "cloud_db2";
 
     static {
         readBuildProperties();
