@@ -13,8 +13,12 @@
 
 package com.ibm.cloud.cloud_db2.db2saas.v1.model;
 
-import com.ibm.cloud.cloud_db2.db2saas.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
+import com.ibm.cloud.cloud_db2.db2saas.v1.model.CreateCustomSettingsDb;
+import com.ibm.cloud.cloud_db2.db2saas.v1.model.CreateCustomSettingsDbm;
+import com.ibm.cloud.cloud_db2.db2saas.v1.model.CreateCustomSettingsRegistry;
+import com.ibm.cloud.cloud_db2.db2saas.v1.model.PostDb2SaasDbConfigurationOptions;
+import com.ibm.cloud.cloud_db2.db2saas.v1.utils.TestUtilities;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;

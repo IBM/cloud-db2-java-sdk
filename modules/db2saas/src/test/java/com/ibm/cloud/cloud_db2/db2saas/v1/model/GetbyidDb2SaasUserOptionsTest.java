@@ -13,8 +13,9 @@
 
 package com.ibm.cloud.cloud_db2.db2saas.v1.model;
 
-import com.ibm.cloud.cloud_db2.db2saas.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
+import com.ibm.cloud.cloud_db2.db2saas.v1.model.GetbyidDb2SaasUserOptions;
+import com.ibm.cloud.cloud_db2.db2saas.v1.utils.TestUtilities;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -32,8 +33,10 @@ public class GetbyidDb2SaasUserOptionsTest {
   public void testGetbyidDb2SaasUserOptions() throws Throwable {
     GetbyidDb2SaasUserOptions getbyidDb2SaasUserOptionsModel = new GetbyidDb2SaasUserOptions.Builder()
       .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
+      .id("test-user")
       .build();
     assertEquals(getbyidDb2SaasUserOptionsModel.xDeploymentId(), "crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::");
+    assertEquals(getbyidDb2SaasUserOptionsModel.id(), "test-user");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

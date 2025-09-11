@@ -13,6 +13,7 @@
 
 package com.ibm.cloud.cloud_db2.db2saas.v1.model;
 
+import com.ibm.cloud.cloud_db2.db2saas.v1.model.SuccessTuneableParamsTuneableParamRegistry;
 import com.ibm.cloud.cloud_db2.db2saas.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
