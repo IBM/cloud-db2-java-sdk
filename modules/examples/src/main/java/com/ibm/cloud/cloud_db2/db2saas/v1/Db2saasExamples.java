@@ -28,6 +28,7 @@ import com.ibm.cloud.cloud_db2.db2saas.v1.model.PostDb2SaasBackupOptions;
 import com.ibm.cloud.cloud_db2.db2saas.v1.model.PostDb2SaasDbConfigurationOptions;
 import com.ibm.cloud.cloud_db2.db2saas.v1.model.PostDb2SaasUserOptions;
 import com.ibm.cloud.cloud_db2.db2saas.v1.model.PutDb2SaasAutoscaleOptions;
+import com.ibm.cloud.cloud_db2.db2saas.v1.model.PutDb2SaasUserOptions;
 import com.ibm.cloud.cloud_db2.db2saas.v1.model.SuccessAutoScaling;
 import com.ibm.cloud.cloud_db2.db2saas.v1.model.SuccessConnectionInfo;
 import com.ibm.cloud.cloud_db2.db2saas.v1.model.SuccessCreateBackup;
@@ -40,6 +41,7 @@ import com.ibm.cloud.cloud_db2.db2saas.v1.model.SuccessPostCustomSettings;
 import com.ibm.cloud.cloud_db2.db2saas.v1.model.SuccessTuneableParams;
 import com.ibm.cloud.cloud_db2.db2saas.v1.model.SuccessUpdateAutoScale;
 import com.ibm.cloud.cloud_db2.db2saas.v1.model.SuccessUserResponse;
+import com.ibm.cloud.cloud_db2.db2saas.v1.model.UpdateUserAuthentication;
 import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 import com.ibm.cloud.sdk.core.util.CredentialUtils;
@@ -185,10 +187,42 @@ public class Db2saasExamples {
     }
 
     try {
+      System.out.println("putDb2SaasUser() result:");
+      // begin-put_db2_saas_user
+      UpdateUserAuthentication updateUserAuthenticationModel = new UpdateUserAuthentication.Builder()
+        .method("internal")
+        .policyId("Default")
+        .build();
+      PutDb2SaasUserOptions putDb2SaasUserOptions = new PutDb2SaasUserOptions.Builder()
+        .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
+        .id("test-user")
+        .newId("test-user")
+        .newIam(false)
+        .newIbmid("test-ibm-id")
+        .newName("test_user")
+        .newPassword("dEkMc43@gfAPl!867^dSbu")
+        .newRole("bluuser")
+        .newEmail("test_user@mycompany.com")
+        .newLocked("no")
+        .newAuthentication(updateUserAuthenticationModel)
+        .build();
+
+      Response<SuccessUserResponse> response = db2saasService.putDb2SaasUser(putDb2SaasUserOptions).execute();
+      SuccessUserResponse successUserResponse = response.getResult();
+
+      System.out.println(successUserResponse);
+      // end-put_db2_saas_user
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
       System.out.println("getbyidDb2SaasUser() result:");
       // begin-getbyid_db2_saas_user
       GetbyidDb2SaasUserOptions getbyidDb2SaasUserOptions = new GetbyidDb2SaasUserOptions.Builder()
         .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
+        .id("test-user")
         .build();
 
       Response<SuccessGetUserByID> response = db2saasService.getbyidDb2SaasUser(getbyidDb2SaasUserOptions).execute();
@@ -302,18 +336,15 @@ public class Db2saasExamples {
     }
 
     try {
-      System.out.println("deleteDb2SaasUser() result:");
       // begin-delete_db2_saas_user
       DeleteDb2SaasUserOptions deleteDb2SaasUserOptions = new DeleteDb2SaasUserOptions.Builder()
         .xDeploymentId("crn:v1:staging:public:dashdb-for-transactions:us-south:a/e7e3e87b512f474381c0684a5ecbba03:69db420f-33d5-4953-8bd8-1950abd356f6::")
         .id("test-user")
         .build();
 
-      Response<Map<String, Object>> response = db2saasService.deleteDb2SaasUser(deleteDb2SaasUserOptions).execute();
-      Map<String, Object> result = response.getResult();
-
-      System.out.println(result);
+      Response<Void> response = db2saasService.deleteDb2SaasUser(deleteDb2SaasUserOptions).execute();
       // end-delete_db2_saas_user
+      System.out.printf("deleteDb2SaasUser() response status code: %d%n", response.getStatusCode());
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);

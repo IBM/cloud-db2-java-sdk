@@ -13,8 +13,11 @@
 
 package com.ibm.cloud.cloud_db2.db2saas.v1.model;
 
-import com.ibm.cloud.cloud_db2.db2saas.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
+import com.ibm.cloud.cloud_db2.db2saas.v1.model.SuccessConnectionInfo;
+import com.ibm.cloud.cloud_db2.db2saas.v1.model.SuccessConnectionInfoPrivate;
+import com.ibm.cloud.cloud_db2.db2saas.v1.model.SuccessConnectionInfoPublic;
+import com.ibm.cloud.cloud_db2.db2saas.v1.utils.TestUtilities;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;

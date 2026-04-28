@@ -21,12 +21,14 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class GetbyidDb2SaasUserOptions extends GenericModel {
 
   protected String xDeploymentId;
+  protected String id;
 
   /**
    * Builder.
    */
   public static class Builder {
     private String xDeploymentId;
+    private String id;
 
     /**
      * Instantiates a new Builder from an existing GetbyidDb2SaasUserOptions instance.
@@ -35,6 +37,7 @@ public class GetbyidDb2SaasUserOptions extends GenericModel {
      */
     private Builder(GetbyidDb2SaasUserOptions getbyidDb2SaasUserOptions) {
       this.xDeploymentId = getbyidDb2SaasUserOptions.xDeploymentId;
+      this.id = getbyidDb2SaasUserOptions.id;
     }
 
     /**
@@ -47,9 +50,11 @@ public class GetbyidDb2SaasUserOptions extends GenericModel {
      * Instantiates a new builder with required properties.
      *
      * @param xDeploymentId the xDeploymentId
+     * @param id the id
      */
-    public Builder(String xDeploymentId) {
+    public Builder(String xDeploymentId, String id) {
       this.xDeploymentId = xDeploymentId;
+      this.id = id;
     }
 
     /**
@@ -71,6 +76,17 @@ public class GetbyidDb2SaasUserOptions extends GenericModel {
       this.xDeploymentId = xDeploymentId;
       return this;
     }
+
+    /**
+     * Set the id.
+     *
+     * @param id the id
+     * @return the GetbyidDb2SaasUserOptions builder
+     */
+    public Builder id(String id) {
+      this.id = id;
+      return this;
+    }
   }
 
   protected GetbyidDb2SaasUserOptions() { }
@@ -78,7 +94,10 @@ public class GetbyidDb2SaasUserOptions extends GenericModel {
   protected GetbyidDb2SaasUserOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.xDeploymentId,
       "xDeploymentId cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.id,
+      "id cannot be empty");
     xDeploymentId = builder.xDeploymentId;
+    id = builder.id;
   }
 
   /**
@@ -99,6 +118,17 @@ public class GetbyidDb2SaasUserOptions extends GenericModel {
    */
   public String xDeploymentId() {
     return xDeploymentId;
+  }
+
+  /**
+   * Gets the id.
+   *
+   * id of the user.
+   *
+   * @return the id
+   */
+  public String id() {
+    return id;
   }
 }
 
